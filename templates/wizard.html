@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Wizard console</title>
+<style>
+body{margin:0;background:#101418;color:#e6edf3;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace}main{max-width:900px;margin:0 auto;padding:1rem}h1{font-size:1.1rem}
+.card{background:#171d24;border:1px solid #2b3643;border-radius:8px;padding:.8rem;margin:.7rem 0}.tag{background:#2456d3;color:#fff;border-radius:4px;padding:0 .4rem}
+pre{white-space:pre-wrap;word-break:break-word;background:#0c1014;padding:.5rem;border-radius:6px}select,textarea{width:100%;background:#0c1014;color:#e6edf3;border:1px solid #2b3643;border-radius:6px;padding:.5rem;font:inherit}
+textarea{min-height:150px;margin-top:.4rem}button{background:#12b76a;color:#fff;border:0;border-radius:6px;padding:.5rem 1rem;font:inherit;cursor:pointer;margin-top:.4rem}.m{color:#8b98a8}.w{color:#f5a524}
+</style></head><body><main>
+<h1>Wizard console: play the world, never the agent</h1>
+<p class="m">Pick a sample to prefill, edit it, and send. Samples are hand-written stand-ins shaped like each service's response. Where you can, paste the service's real output instead, and check the shapes against their docs.</p>
+<div id="p"></div><h3>Answered</h3><div id="d" class="m"></div>
+<script>
+const SM={gnani:[
+["TPA call placed (trigger_call)",{status:"success",conversationId:"conv_0042",message:"Call initiated"}],
+["TPA settlement call result (stats)",{conversationId:"conv_0042",status:"completed",durationSeconds:74,transcript:[{speaker:"Vasool",text:"Hello, this is Vasool calling for Ravi Menon about claim VH-2026-448120. Could you confirm the settlement?"},{speaker:"TPA",text:"Yes. The claim is settled. We paid three lakh rupees, Rs 3,00,000, the policy limit."},{speaker:"Vasool",text:"And the balance against the hospital bill?"},{speaker:"TPA",text:"Rs 1,20,000 is outstanding. Rs 8,000 of that is non-payable items. Settlement note reference VH-SN-90417."}]}],
+["Sanjeevani confirms receipt (stats)",{conversationId:"conv_0043",status:"completed",transcript:[{speaker:"Vasool",text:"This is Vasool for Ravi Menon, policy SJV-5540218. Did your claims desk receive a courier pack from him?"},{speaker:"Sanjeevani",text:"Yes. Received at the claims desk this morning. Twelve documents. Claim number SJV-CL-2026-09417, turnaround seven working days."}]}],
+["Sanjeevani confirms payout Rs 1,12,000 (stats)",{conversationId:"conv_0044",status:"completed",transcript:[{speaker:"Vasool",text:"Following up on claim SJV-CL-2026-09417 for Ravi Menon."},{speaker:"Sanjeevani",text:"Approved. Rs 1,12,000 has been disbursed to the policyholder's registered account today."}]}],
+["Sanjeevani pays short Rs 1,04,000 (stats)",{conversationId:"conv_0044",status:"completed",transcript:[{speaker:"Vasool",text:"Following up on claim SJV-CL-2026-09417."},{speaker:"Sanjeevani",text:"Settled. We have disbursed Rs 1,04,000. Rs 8,000 is deducted as proportionate deduction on room rent."}]}]],
+pinelabs:[["Mandate created",{mandate_id:"UMN20261001001",status:"PENDING",amount:1499,currency:"INR"}],["Mandate status ACTIVE",{mandate_id:"UMN20261001001",status:"ACTIVE",amount:1499}],["Capture, one presentation",{mandate_id:"UMN20261001001",status:"SUCCESS",captured_amount:1499,payment_id:"PL202610010042"}]],
+delhivery:[["Shipment created",{success:true,waybill:"4419920086112",status:"Manifested"}],["Pickup request created",{success:true,pickup_id:"PU2026100101",pickup_location:"VASOOL_MAIN"}],["Tracking: pickup scheduled",{waybill:"4419920086112",status:"Pickup Scheduled"}],["Tracking: picked up",{waybill:"4419920086112",status:"Picked Up"}],["Tracking: in transit",{waybill:"4419920086112",status:"In Transit"}],["Tracking: delivered",{waybill:"4419920086112",status:"Delivered",delivered_to:"Claims Desk, Sanjeevani Health Insurance, Banjara Hills"}],["Document: delivery signature",{waybill:"4419920086112",document_type:"signature",document_url:"/static/signature.svg"}]]};
+const shown=new Set();
+async function poll(){const s=await (await fetch("/wizard/pending")).json();const ids=new Set(s.pending.map(x=>x.id));
+ for(const x of s.pending){if(shown.has(x.id))continue;shown.add(x.id);const c=document.createElement("div");c.className="card";c.id="c"+x.id;
+  const L=SM[x.connector]||[];c.innerHTML=`<span class="tag">${x.connector}</span> <b></b> <span class="m">${x.t}</span><pre></pre>${x.connector=="gnani"?'<div class="w">Gnani: paste the real Gnani output if you can.</div>':""}<select><option value="">Prefill with a sample…</option>${L.map((a,i)=>`<option value="${i}">${a[0]}</option>`).join("")}</select><textarea placeholder="Response to send back"></textarea><br><button>Send to agent</button>`;
+  c.querySelector("b").textContent=x.name;c.querySelector("pre").textContent=x.body;
+  c.querySelector("select").onchange=e=>{if(e.target.value!=="")c.querySelector("textarea").value=JSON.stringify(L[e.target.value][1],null,1)};
+  c.querySelector("button").onclick=async()=>{await fetch("/wizard/reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:x.id,reply:c.querySelector("textarea").value})});c.remove()};
+  document.getElementById("p").prepend(c)}
+ document.querySelectorAll(".card").forEach(c=>{if(!ids.has(c.id.slice(1)))c.remove()});
+ document.getElementById("d").innerHTML=s.done.map(x=>`${x.t} ${x.connector} ${x.name}`).join("<br>")}
+poll();setInterval(poll,1500);
+</script></main></body></html>

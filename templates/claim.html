@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Vasool</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--ink:#101828;--mute:#667085;--line:#e4e9f2;--pri:#2456d3;--ok:#12b76a;--bad:#d92d20;--tint:#eef3ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#e9effc,var(--bg) 300px) no-repeat var(--bg);color:var(--ink);font:400 15px/1.55 Inter,system-ui,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);padding:.75rem 1.25rem;display:flex;align-items:center;gap:.7rem}header span{color:var(--mute)}
+.lg{width:2rem;height:2rem;border-radius:8px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:700}
+.app{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1rem 3rem}
+.rail{list-style:none;margin:0;padding:0;position:sticky;top:1rem;align-self:start}.rail li{display:flex;gap:.7rem;align-items:center;padding:.45rem 0;color:var(--mute);font-weight:500}
+.rail i{width:1.6rem;height:1.6rem;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font:600 .75rem Inter;font-style:normal}
+.rail .on{color:var(--ink);font-weight:600}.rail .on i{background:var(--pri);border-color:var(--pri);color:#fff}.rail .done i{background:var(--ok);border-color:var(--ok);color:#fff}
+@media(max-width:760px){.app{grid-template-columns:1fr}.rail{display:none}}
+#stage.in{animation:fd .35s}@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes rot{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+h1{font-size:1.6rem;margin:.2rem 0 .3rem}h3{font-size:1rem;margin:0 0 .6rem}.sub,small{color:var(--mute)}.sub{margin:.2rem 0 1rem}
+.card,.tile,.row{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 6px 18px rgba(16,24,40,.04)}.card{padding:1.1rem;margin-bottom:.9rem}
+label{display:block;font-weight:500;margin:.8rem 0 .25rem}input,textarea{width:100%;padding:.65rem .75rem;border:1px solid var(--line);border-radius:8px;font:inherit}
+.pr{display:flex;gap:.5rem}.pr span{padding:.65rem .75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.btn{background:var(--pri);color:#fff;border:0;border-radius:8px;padding:.7rem 1.3rem;font:600 .95rem Inter;cursor:pointer;display:inline-block}.btn:disabled{opacity:.4}.btn.g{background:none;color:var(--pri);border:1.5px solid var(--pri)}.sm{padding:.4rem .8rem;font-size:.85rem}
+.foot{margin-top:1.1rem;display:flex;gap:.8rem;justify-content:flex-end;align-items:center}
+.otp{display:flex;gap:.4rem;margin:.4rem 0}.otp input{width:2.7rem;text-align:center;font:600 1.2rem Inter;padding:.6rem 0}
+.row{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;margin-bottom:.5rem}.row>div{flex:1}.row small{display:block}
+.ck{width:1.35rem;height:1.35rem;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:.75rem;color:#fff}
+.ok .ck{background:var(--ok);border-color:var(--ok)}.bad{border-color:var(--bad)}.bad .ck{background:var(--bad);border-color:var(--bad)}.ck.sp{border-top-color:var(--pri);animation:rot .8s linear infinite}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:.9rem}.tile{padding:1rem}.tile b{display:block;font-size:1.5rem}.tile.hl{background:var(--pri);border-color:var(--pri);color:#fff}.tile.hl small{color:#dbe6ff}
+@media(max-width:600px){.tiles{grid-template-columns:1fr}}
+.tb{width:100%;border-collapse:collapse}.tb td{padding:.4rem 0;border-bottom:1px solid var(--line)}.tb td:last-child{text-align:right}
+.call{display:flex;align-items:center;gap:.8rem}.call>div:nth-child(2){flex:1}.call small{display:block}.av{width:2.6rem;height:2.6rem;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:700}
+.wave{display:flex;gap:3px;height:30px;align-items:center;margin:.8rem 0}.wave s{width:4px;background:var(--pri);height:8px;border-radius:2px;animation:wv 1s ease-in-out infinite}.wave s:nth-child(2n){animation-delay:.2s}.wave s:nth-child(3n){animation-delay:.45s}.wave.off s{animation:none;height:5px;opacity:.4}@keyframes wv{50%{height:26px}}
+.ln{margin:.4rem 0;padding:.55rem .8rem;border-radius:10px;max-width:86%;animation:fd .3s}.ln.v{background:var(--tint)}.ln.t{background:var(--bg);margin-left:auto;border:1px solid var(--line)}
+.fr{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;border-bottom:1px dashed var(--line);animation:fd .3s}.fr span{color:var(--mute)}
+.alert{border:1.5px solid var(--bad);border-radius:10px;padding:.8rem 1rem;margin-top:.7rem}.alert p{margin:.2rem 0 .6rem}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap}.chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:.4rem .95rem;font:500 .9rem Inter;cursor:pointer}.chip.on{border-color:var(--pri);background:var(--tint);color:var(--pri);font-weight:600}
+.ph{background:var(--pri);color:#fff;margin:-1.1rem -1.1rem 1rem;padding:.9rem 1.1rem;border-radius:12px 12px 0 0}.ph small{display:block;color:#dbe6ff}.sum{display:flex;justify-content:space-between;align-items:center}.sum b{font-size:1.3rem}
+.tv{list-style:none;margin:0;padding:0}.ev{display:flex;gap:.9rem;padding-bottom:1rem;position:relative;animation:fd .5s}.ev>i{width:.95rem;height:.95rem;border-radius:50%;background:var(--ok);margin-top:.3rem;flex:none}
+.ev:not(:last-child):before{content:"";position:absolute;left:.45rem;top:1.3rem;bottom:-.1rem;width:2px;background:var(--line)}.sig img{max-width:260px;border:1px solid var(--line);border-radius:8px;background:#fff}.sigmark{font-family:cursive;font-size:2rem;margin:.4rem 0 0;transform:rotate(-2deg)}
+</style></head><body>
+<header><div class="lg">V</div><b>Vasool</b><span>Recover the rest of your insurance claim</span></header>
+<div class="app"><ol class="rail" id="rail"></ol><main id="stage"></main></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const inr=n=>"₹"+Number(n||0).toLocaleString("en-IN"),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const J=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b||{})}).then(r=>r.json());
+const RAIL=["Sign in","Your claim","Documents","Eligibility","Insurer call","Claim file","Pickup","Authorise","Tracking"];
+let G=null,cur=null,U=()=>{},HOLD=0;
+function otpUI(el,hint){el.innerHTML=`<div class="otp">${"<input maxlength=1 inputmode=numeric>".repeat(6)}</div><button class="btn sm" id="vf">Verify</button> <span id="om" class="sub">${hint}</span>`;
+ const bx=$$(".otp input",el);bx.forEach((b,i)=>b.oninput=()=>{if(b.value&&bx[i+1])bx[i+1].focus()});bx[0].focus();
+ $("#vf",el).onclick=async()=>{const x=await J("/verify_otp",{code:bx.map(b=>b.value).join("")});$("#om",el).textContent=x.ok?"Verified":"That code is not right."}}
+function wire(el){$$("input[type=file]",el).forEach(f=>f.onchange=()=>{const r=f.closest(".row"),a=f.files[0];$("small",r).textContent=a?a.name:"Not uploaded";r.classList.toggle("ok",!!a);$(".ck",r).textContent=a?"✓":""})}
+async function send(el){const fd=new FormData();let n=0;$$("input[type=file]",el).forEach(i=>{if(i.files[0]){fd.append(i.id.slice(2),i.files[0]);n++}});if(n)await fetch("/submit_docs",{method:"POST",body:fd});return n}
+const fRow=(k,l)=>`<div class="row"><span class="ck"></span><div><b>${l}</b><small>Not uploaded</small></div><label class="btn g sm">Choose<input type="file" hidden id="f-${k}"></label></div>`;
+
+function v_id(st){st.innerHTML=`<h1>Sign in to Vasool</h1><p class="sub">Confirm your details. We send a code to your Telegram.</p><div class="card"><label style="margin-top:0">Full name</label><input id="nm" value="Ravi Menon"><label>Mobile number</label><div class="pr"><span>+91</span><input id="ph" value="98480 12345"></div><label>Email address</label><input id="em" type="email" placeholder="you@example.com"><div id="oa" style="margin-top:1rem"><button class="btn" id="snd">Send code</button></div></div>`;
+ $("#snd").onclick=async()=>{const r=await J("/api/start",{name:$("#nm").value,phone:$("#ph").value,email:$("#em").value});otpUI($("#oa"),r.sent?"Code sent to your Telegram.":"Could not send: "+esc(r.error))}}
+function v_basics(st){st.innerHTML=`<h1>Confirm your claim</h1><p class="sub">Just these. Vasool reads everything else from your documents.</p><div class="card"><h3>Primary insurer</h3><label style="margin-top:0">Insurer or TPA</label><input id="p1" value="Vidal Health TPA"><label>Member or account ID</label><input id="pid" value="VH-20458821"></div><div class="card"><h3>Hospital</h3><input id="h1" value="Sunrise Multispeciality Hospital, Hyderabad"></div><div class="card"><h3>Secondary insurer</h3><label style="margin-top:0">Insurer</label><input id="s1" value="Sanjeevani Health Insurance"><label>Policy or account number</label><input id="sid" value="SJV-5540218"></div><div class="foot"><button class="btn" id="nx">Confirm and continue</button></div>`;
+ $("#nx").onclick=()=>{$("#nx").disabled=true;J("/api/basics",{primary:$("#p1").value,primary_id:$("#pid").value,hospital:$("#h1").value,secondary:$("#s1").value,secondary_id:$("#sid").value})}}
+function v_docs(st){st.innerHTML=`<h1>Upload your documents</h1><p class="sub">Photos or scans are fine. Upload what you have; Vasool checks every item.</p>${Object.entries(G.docs).map(([k,d])=>fRow(k,d.label)).join("")}<div class="foot"><span id="cn" class="sub"></span><button class="btn" id="nx">Send for checking</button></div>`;wire(st);
+ $("#nx").onclick=async()=>{$("#nx").disabled=true;if(!await send(st)){$("#nx").disabled=false;$("#cn").textContent="Choose at least one file."}}}
+function v_elig(st){st.innerHTML=`<h1>Checking your claim</h1><p class="sub">Vasool reads your documents against Sanjeevani's policy.</p><div id="ck"></div><div id="rs"></div>`;
+ const T=["Reading your documents","Matching charges to policy sub-limits","Checking exclusions","Separating non-payable items"];let k=0,shown=0;
+ $("#ck").innerHTML=T.map((t,i)=>`<div class="row" id="c${i}"><span class="ck"></span><div><b>${t}</b></div></div>`).join("");
+ const run=()=>{const r=$("#c"+k);if(!r)return;$(".ck",r).classList.add("sp");const f=()=>{if(k==T.length-1&&!G.elig)return setTimeout(f,400);$(".ck",r).classList.remove("sp");r.classList.add("ok");$(".ck",r).textContent="✓";k++;run()};setTimeout(f,700)};run();
+ return s=>{const e=s.elig;if(!e||shown||k<T.length)return;shown=1;
+  $("#rs").innerHTML=`<div class="tiles"><div class="tile"><small>Shortfall from primary</small><b>${inr(e.outstanding)}</b></div><div class="tile"><small>Not payable</small><b>${inr(e.outstanding-e.eligible)}</b></div><div class="tile hl"><small>You can claim</small><b>${inr(e.eligible)}</b></div></div><div class="card"><h3>Payable under the policy</h3><table class="tb">${(e.payable||[]).map(([n,a])=>`<tr><td>${esc(n)}</td><td>${inr(a)}</td></tr>`).join("")}</table></div><div class="card"><h3>Why some items are not payable</h3><table class="tb">${(e.non_payable||[]).map(([n,a])=>`<tr><td>${esc(n)}</td><td>${inr(a)}</td></tr>`).join("")}</table><p class="sub" style="margin:.7rem 0 0">${esc(e.notes)}</p></div><div class="foot"><button class="btn" id="ag">Agree and continue</button></div>`;
+  $("#ag").onclick=()=>{$("#ag").disabled=true;J("/api/agree")}}}
+function v_call(st){st.innerHTML=`<h1>Contacting your first insurer</h1><p class="sub">Vasool is calling the primary TPA for the settlement note.</p><div class="card"><div class="call"><div class="av">V</div><div><b id="cs">Calling…</b><small>Primary TPA helpline</small></div><b id="tm">0:00</b></div><div class="wave" id="wv">${"<s></s>".repeat(20)}</div><div id="tr"></div></div><div id="nt"></div>`;
+ let t=0,ln=0,nd=0,nx=0;const t0=Date.now();const iv=setInterval(()=>{t++;$("#tm").textContent=Math.floor(t/60)+":"+String(t%60).padStart(2,"0")},1000);
+ return s=>{const L=s.transcript||[];if(!nd&&Date.now()-t0<90000)HOLD=Date.now()+2000;if(L.length&&!nx)nx=Date.now()+2000;if(ln<L.length&&Date.now()>=nx){$("#tr").insertAdjacentHTML("beforeend",`<div class="ln ${L[ln][0]}">${esc(L[ln][1])}</div>`);ln++;nx=Date.now()+Math.max(30000/L.length,3000)}
+  if(s.note&&ln>=L.length&&!nd){nd=1;clearInterval(iv);HOLD=Date.now()+3500;$("#wv").classList.add("off");$("#cs").textContent="Call complete";
+   $("#nt").innerHTML=`<div class="card"><h3>✓ Settlement note received</h3><div class="fr"><span>Paid by primary insurer</span><b>${inr(s.note.paid)}</b></div><div class="fr"><span>Outstanding</span><b>${inr(s.note.outstanding)}</b></div><div class="fr"><span>Reference</span><b>${esc(s.note.ref)}</b></div></div>`}}}
+function v_file(st,mode){
+ const keys=Object.keys(G.docs);
+ st.innerHTML=`<h1>${mode?"Audit your claim file":"Preparing your claim file"}</h1>
+ <p class="sub">${mode?"Vasool's AI checks each uploaded document. Missing documents can be uploaded here immediately.":"Vasool fills Sanjeevani's claim form from your documents and prepares the checklist."}</p>
+ ${mode?`<div class="card"><h3>AI document verification</h3><p class="sub" style="margin:.2rem 0 0">Green means Vasool's AI inspected the uploaded file and recorded what it checked. Files you never uploaded stay open for upload.</p></div>`:'<div class="card"><h3>Claim form, auto-filled</h3><div id="ff"></div></div>'}
+ <div class="card"><h3>${mode?"Sanjeevani's checklist":"Documents"}</h3>
+ ${keys.map(k=>`<div class="row" id="k-${k}"><span class="ck"></span><div><b>${esc(G.docs[k].label)}</b><small>Waiting</small></div></div>`).join("")}
+ ${!mode?`<div class="row" id="k-note"><span class="ck"></span><div><b>Settlement note from primary insurer</b><small>Attached from the call</small></div></div>`:''}
+ <div id="fx"></div></div>`;
+
+ const seen={},fd={};let lastKey="";
+ const set=(k,c,m,x,evidence="",detected="")=>{const r=$("#k-"+k);if(!r)return;const ck=$(".ck",r);r.className="row "+c;ck.className="ck"+(c?"":" sp");ck.textContent=x;$("small",r).textContent=m;let ev=r.querySelector(".ai-evidence");if((evidence||detected)&&!ev){ev=document.createElement("small");ev.className="ai-evidence";ev.style.cssText="display:block;margin-top:.2rem;color:var(--mute);line-height:1.4";r.querySelector("div").appendChild(ev)}if(ev){ev.textContent=(detected?"AI identified: "+detected+"  ":"")+(evidence?"• Evidence: "+evidence:"")}};
+ const addUpload=(k,d)=>`<div class="alert" id="up-${k}"><b>${esc(d.label)}</b><p>${esc(d.reason||"Please upload this document.")}</p><label class="btn sm">Choose file<input type="file" hidden id="uf-${k}"></label><small id="un-${k}" style="display:block;margin-top:.4rem">No file selected</small></div>`;
+ const sendNew=async()=>{const fd=new FormData();let n=0;keys.forEach(k=>{const i=$("#uf-"+k);if(i&&i.files[0]){fd.append(k,i.files[0]);n++}});if(!n)return 0;const r=await fetch("/submit_docs",{method:"POST",body:fd}).then(x=>x.json());return r.ok?n:0};
+
+ return s=>{
+   let n=0;
+   Object.entries(s.form||{}).forEach(([a,b])=>{if(!fd[a]&&$("#ff")){fd[a]=1;setTimeout(()=>$("#ff").insertAdjacentHTML("beforeend",`<div class="fr"><span>${esc(a)}</span><b>${esc(b)}</b></div>`),n++*180)}});
+
+   if(s.note&&!mode)set("note","ok","Attached from the call","✓");
+
+   Object.entries(s.docs).forEach(([k,d])=>{
+     const sig=d.status+"|"+d.reason;if(seen[k]===sig)return;seen[k]=sig;
+     if(d.status==="verified") set(k,"ok","AI verified: "+(d.reason||"Checks passed"),"✓",d.evidence||"",d.detected_type||"");
+     else if(d.status==="retake") set(k,"bad","AI needs a new file: "+(d.reason||"Check failed"),"!",d.evidence||"",d.detected_type||"");
+     else if(d.status==="missing") set(k,"bad","Not uploaded yet","!");
+     else if(d.status==="uploaded") set(k,"","AI is reviewing…","");
+     else set(k,"","Waiting for upload"," ");
+   });
+
+   if(!mode)return;
+   const missing=Object.entries(s.docs).filter(([k,d])=>d.status==="missing"||d.status==="retake"||d.status==="empty");
+   const uploaded=Object.entries(s.docs).filter(([k,d])=>d.status==="uploaded");
+   const key=missing.map(([k,d])=>k+"|"+d.status+"|"+d.reason).join("\n")+"\nU:"+uploaded.map(x=>x[0]).join(",");
+   if(key===lastKey)return;lastKey=key;
+   const fx=$("#fx");if(!fx)return;
+   fx.innerHTML=missing.length?`<div class="card" style="margin-top:.9rem"><h3>Upload missing documents</h3><p class="sub">This section is always available — no AI decision is needed to show upload controls.</p>${missing.map(([k,d])=>addUpload(k,d)).join("")}<div class="foot"><button class="btn" id="sd">Send selected documents to Vasool</button></div><div id="upmsg" class="sub" style="margin-top:.6rem"></div></div>`:`<div class="card" style="margin-top:.9rem;border-color:var(--ok)"><b>All required documents verified by Vasool's AI.</b><p class="sub" style="margin:.3rem 0 0">Preparing the pickup step…</p></div>`;
+   if(missing.length){missing.forEach(([k])=>{const i=$("#uf-"+k),u=$("#un-"+k);if(i)i.onchange=()=>{u.textContent=i.files[0]?i.files[0].name:"No file selected"}});$("#sd").onclick=async()=>{const b=$("#sd"),m=$("#upmsg");b.disabled=true;b.textContent="Uploading…";const n=await sendNew();if(!n){b.disabled=false;b.textContent="Send selected documents to Vasool";m.textContent="Choose at least one file."}else{b.textContent="Uploaded — Vasool will verify them";m.textContent="Your documents were uploaded. Vasool's AI will check them before continuing."}}}
+ };
+}
+function v_pick(st){const ds=[1,2,3].map(n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"})});let d0=ds[0],s0="10 am to 1 pm";
+ st.innerHTML=`<h1>Where should we collect your originals?</h1><p class="sub">A courier collects them from home and delivers them to the insurer's claims office.</p><div class="card"><label style="margin-top:0">Pickup address</label><textarea id="ad" rows="2">Flat 402, Lakeview Residency, Madhapur, Hyderabad 500081</textarea><label>Pickup date</label><div class="chips" id="dc">${ds.map((d,i)=>`<button class="chip ${i?"":"on"}">${d}</button>`).join("")}</div><label>Time slot</label><div class="chips" id="sc">${["10 am to 1 pm","2 pm to 5 pm"].map((x,i)=>`<button class="chip ${i?"":"on"}">${x}</button>`).join("")}</div></div><div class="foot"><button class="btn" id="nx">Continue</button></div>`;
+ const pk=(id,f)=>$$(id+" .chip").forEach(b=>b.onclick=()=>{$$(id+" .chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");f(b.textContent)});pk("#dc",v=>d0=v);pk("#sc",v=>s0=v);
+ $("#nx").onclick=()=>{$("#nx").disabled=true;J("/api/pickup",{address:$("#ad").value,date:d0,slot:s0})}}
+function v_auth(st){st.innerHTML=`<h1>Authorise Vasool to act</h1><p class="sub">Two quick confirmations before anything is couriered.</p><div class="card" id="a1"></div><div class="card" id="a2" style="opacity:.45"></div>`;
+ const sp=t=>`<div class="row" style="border:0;box-shadow:none;margin:0;padding:0"><span class="ck sp"></span><div>${t}</div></div>`;let m1="",m2="";
+ return s=>{const a1=$("#a1"),a2=$("#a2");
+  if(!s.otp_pending&&!s.otp_ok&&m1!="w"){m1="w";a1.innerHTML=sp("Vasool is sending a confirmation code to your Telegram")}
+  if(s.otp_pending&&!s.otp_ok&&m1!="o"){m1="o";a1.innerHTML=`<h3>1. Confirm the claim with a code</h3>`;const d=document.createElement("div");a1.append(d);otpUI(d,"Code sent to your Telegram.")}
+  if(s.otp_ok&&m1!="k"){m1="k";a1.innerHTML=`<h3 style="margin:0;color:var(--ok)">✓ Claim confirmed</h3>`;a2.innerHTML=sp("Setting up secure checkout")}
+  if(s.pay&&m2!="p"){m2="p";const p=s.pay;a2.style.opacity=1;a2.innerHTML=`<div class="ph"><b>Pine Labs</b><small>UPI one-time mandate · test mode</small></div><div class="sum"><span>Vasool Claims</span><b>${inr(p.amount||1499)}</b></div><small>Reserved on your account. Not charged now.</small><label>UPI ID</label><input value="ravi@okhdfcbank"><div class="foot"><button class="btn" id="pp">Approve hold</button></div>`;
+   $("#pp").onclick=async()=>{const btn=$("#pp");btn.disabled=true;a2.innerHTML=sp("Waiting for your approval in the UPI app…");await new Promise(r=>setTimeout(r,1600));a2.innerHTML=`<h3 style="margin:0;color:var(--ok)">✓ Hold active</h3><p class="sub" style="margin:.3rem 0 0">${inr(p.amount||1499)} reserved, not charged.</p><p class="sub" style="margin:.3rem 0 0">Opening Delhivery tracking…</p>`;await J("/api/paid");}}}}
+function v_track(st){
+ st.innerHTML=`<h1>Track your document pickup</h1><p class="sub">Live-style Delhivery tracking from your home to Sanjeevani's claims desk.</p>
+ <div class="tiles"><div class="tile hl"><small>Current status</small><b id="ds">Pickup scheduled</b></div><div class="tile"><small>Carrier</small><b>Delhivery</b></div><div class="tile"><small>Tracking ID</small><b id="dw">VSLDEMO20261002</b></div></div>
+ <div class="card"><div class="fr"><span>Pickup</span><b id="dfrom">Your registered address</b></div><div class="fr"><span>Destination</span><b>Claims Desk, Sanjeevani Health Insurance</b></div><div class="fr"><span>ETA</span><b id="deta">—</b></div><div style="margin-top:.9rem;height:10px;border-radius:99px;background:var(--line);overflow:hidden"><div id="dp" style="height:100%;width:0%;background:var(--pri);transition:width .5s"></div></div></div>
+ <div class="card"><h3>Shipment journey</h3><ul class="tv" id="tv"></ul></div>
+ <div id="sg"></div><div id="sm"></div>`;
+ let n=0,sg=0,sm=0,lastStatus="";
+ return s=>{
+   const d=s.delivery||{}; if(d.status&&d.status!==lastStatus){lastStatus=d.status;$("#ds").textContent=d.status;$("#dp").style.width=Math.max(7,Number(d.progress||0))+"%";$("#dw").textContent=d.tracking_id||"VSLDEMO20261002";$("#deta").textContent=d.eta||"—";}
+   while(n<s.timeline.length){const e=s.timeline[n++];$("#tv").insertAdjacentHTML("beforeend",`<li class="ev"><i></i><div><b>${esc(e.text)}</b><br><small>${e.t}</small></div></li>`)}
+   if(s.signature&&!sg){sg=1;const v=String(s.signature);$("#sg").innerHTML=`<div class="card sig"><h3>Digital proof of delivery</h3><div style="padding:1rem;border:1px solid var(--line);border-radius:12px;background:#fff"><small>Delhivery EPOD signature</small><div class="sigmark">Sanjeevani Claims Desk</div><div class="fr" style="margin-top:.5rem"><span>Captured</span><b>Digitally signed</b></div></div><p class="sub" style="margin:.7rem 0 0">A signature proves that someone signed. Vasool independently confirms the receiving desk before treating delivery as fully verified.</p></div>`}
+   if(s.summary&&!sm){sm=1;const m=s.summary;$("#sm").innerHTML=`<div class="card" style="border-color:var(--ok)"><div class="sum"><h3 style="margin:0;color:var(--ok)">✓ Payment processed</h3><small>Claim closed</small></div><div class="tiles" style="margin:1rem 0"><div class="tile hl"><small>Recovered from insurer</small><b>${inr(m.recovered)}</b></div><div class="tile"><small>Vasool fee captured</small><b>${inr(m.fee)}</b></div><div class="tile"><small>Claimed vs paid</small><b>${inr((m.claimed||0)-(m.recovered||0))} gap</b></div></div><table class="tb"><tr><td>Claim number</td><td>${esc(m.claim_no)}</td></tr><tr><td>Fee payment</td><td>${esc(m.fee_ref)}</td></tr></table></div>`}
+ } }
+
+const VIEW={identity:[0,v_id],basics:[1,v_basics],docs:[2,v_docs],verify:[2,st=>v_file(st,1)],eligibility:[3,v_elig],calling:[4,v_call],note:[4,v_call],form:[5,st=>v_file(st,0)],audit:[5,st=>v_file(st,1)],pickup:[6,v_pick],authorize:[7,v_auth],track:[8,v_track],settled:[8,v_track]};
+async function poll(){try{G=await (await fetch("/state")).json()}catch(e){return}
+ const v=VIEW[G.stage]||VIEW.identity;
+ if(v[1]!==cur){if(Date.now()<HOLD)return U(G);cur=v[1];const st=$("#stage");st.className="";void st.offsetWidth;st.className="in";st.innerHTML="";U=v[1](st)||(()=>{});
+  $("#rail").innerHTML=RAIL.map((t,i)=>`<li class="${i<v[0]?"done":i===v[0]?"on":""}"><i>${i<v[0]?"✓":i+1}</i>${t}</li>`).join("")}
+ U(G)}
+poll();setInterval(poll,1200);
+</script></body></html>

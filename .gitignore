@@ -1,0 +1,9 @@
+.env
+credentials.json
+token.json
+uploads/
+terminal_logs/
+decision_log.jsonl
+__pycache__/
+venv/
+*.pyc
