@@ -13,6 +13,13 @@ A claimant signs in, confirms three details, and uploads their documents. Vasool
 4. **Fills the second insurer's claim form**, audits the full document checklist, and flags what is missing.
 5. **Asks for an OTP and a fee hold** (UPI one-time mandate), books a reverse pickup, tracks delivery, confirms receipt with the insurer by phone, and captures the fee only after the insurer pays the full amount.
 
+<img width="1911" height="1058" alt="05_documents_ready_to_send png" src="https://github.com/user-attachments/assets/1791f941-87d7-4eb6-9174-6ee74a2223d3" />
+<img width="1917" height="1077" alt="04_documents_upload png" src="https://github.com/user-attachments/assets/45b545a3-6109-4cbd-bb1b-3e0883757d8d" />
+<img width="1916" height="1072" alt="03_your_claim png" src="https://github.com/user-attachments/assets/c07de615-b66a-4df0-aaf2-91a25132c49b" />
+
+
+
+
 ## How it works
 - **Agent:** Gemini (gemini-3.1-flash-lite) in a tool-calling loop. A written system prompt defines rules R0 to R7, hard limits (for example one fee capture only, no dispatch before authorisation) and an evidence standard for document verification.
 - **Tools (12):** chat send, OTP, document status, timeline, screen control, Gnani call / find conversation / read stats, Pine Labs, Delhivery, Sheets, Gmail.
