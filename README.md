@@ -13,9 +13,18 @@ A claimant signs in, confirms three details, and uploads their documents. Vasool
 4. **Fills the second insurer's claim form**, audits the full document checklist, and flags what is missing.
 5. **Asks for an OTP and a fee hold** (UPI one-time mandate), books a reverse pickup, tracks delivery, confirms receipt with the insurer by phone, and captures the fee only after the insurer pays the full amount.
 
-<img width="1911" height="1058" alt="05_documents_ready_to_send png" src="https://github.com/user-attachments/assets/1791f941-87d7-4eb6-9174-6ee74a2223d3" />
-<img width="1917" height="1077" alt="04_documents_upload png" src="https://github.com/user-attachments/assets/45b545a3-6109-4cbd-bb1b-3e0883757d8d" />
+<img width="1902" height="1072" alt="02_signin png" src="https://github.com/user-attachments/assets/a06558e0-d8b1-48ca-8d8a-4b92ef911034" />
 <img width="1916" height="1072" alt="03_your_claim png" src="https://github.com/user-attachments/assets/c07de615-b66a-4df0-aaf2-91a25132c49b" />
+<img width="1917" height="1077" alt="04_documents_upload png" src="https://github.com/user-attachments/assets/45b545a3-6109-4cbd-bb1b-3e0883757d8d" />
+<img width="1911" height="1058" alt="05_documents_ready_to_send png" src="https://github.com/user-attachments/assets/1791f941-87d7-4eb6-9174-6ee74a2223d3" />
+<img width="1911" height="1067" alt="06_ai_verification_retake png" src="https://github.com/user-attachments/assets/d92f59d6-df63-470e-8c46-e3e24c8431bb" />
+<img width="1916" height="1080" alt="07_upload_replacement png" src="https://github.com/user-attachments/assets/3fea6534-a680-4fb6-9e1d-48b5b64eeef4" />
+<img width="1917" height="1071" alt="08_insurer_call_transcript png" src="https://github.com/user-attachments/assets/13d6cfc0-7a2f-434f-a892-add1acaf4be3" />
+<img width="1917" height="1077" alt="09_eligibility png" src="https://github.com/user-attachments/assets/25a05d38-d8c1-45e4-859b-90526db33be7" />
+<img width="1917" height="1090" alt="10_pickup_details png" src="https://github.com/user-attachments/assets/e034cabd-f63a-4d18-b2b0-3cb9325a4103" />
+<img width="1917" height="1066" alt="12_authorise_fee_hold png" src="https://github.com/user-attachments/assets/49c3af05-d4c9-4973-9a57-dcdb5b24e05d" />
+<img width="1917" height="1075" alt="13_tracking_payment_processed png" src="https://github.com/user-attachments/assets/375514fc-fc99-4f86-b8b7-847b8f6ef7f8" />
+
 
 
 
