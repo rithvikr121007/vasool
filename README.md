@@ -1,6 +1,6 @@
 # Vasool: an AI agent that recovers the rest of a health-insurance claim
 
-Built for The Ken Case-Build Competition 2026 (shortlisted to Round 3). All people, hospitals, insurers and documents in this project are fictional.
+Built for The Ken Case-Build Competition 2026 (shortlisted to Semi-Finals nationally). All people, hospitals, insurers and documents in this project are fictional.
 
 ## The problem
 When a first insurer pays only part of a hospital bill, the patient can claim the balance from a second insurer, but the two insurers don't coordinate. The patient has to collect settlement notes, assemble a document pack and chase a courier. Many give up and the claim lapses.
